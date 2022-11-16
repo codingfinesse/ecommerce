@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ecommerce": {
+    "angularEcommerce": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,21 +13,33 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ecommerce",
+            "outputPath": "dist/angular-ecommerce",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/css/style.css",
+              "src/assets/fonts/style.css",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
+            ]
           },
           "configurations": {
+            "github-pages": {
+              "baseHref": "/ecommerce/"
+            },
             "production": {
               "budgets": [
                 {
@@ -64,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ecommerce:build:production"
+              "browserTarget": "angularEcommerce:build:production"
             },
             "development": {
-              "browserTarget": "ecommerce:build:development"
+              "browserTarget": "angularEcommerce:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ecommerce:build"
+            "browserTarget": "angularEcommerce:build"
           }
         },
         "test": {
@@ -86,7 +98,6 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
-              "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
@@ -96,9 +107,15 @@
           }
         },
         "deploy": {
-          "builder": "angular-cli-ghpages:deploy"
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "/dist/ecommerce/index.html"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
